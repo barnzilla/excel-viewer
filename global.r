@@ -3,6 +3,7 @@ packages <- c(
   "dplyr", 
   "DT", 
   "ggplot2",
+  "magrittr",
   "plotly",
   "readr", 
   "readxl",

@@ -2045,45 +2045,66 @@ server <- function(input, output, session) {
     
     # Render plot
     if(input$plot_menu == "Bar") {
+      # Get plot object and stats
+      p <- get_bar_plot(
+        df = cached$d,
+        x = input$x_variable_menu,
+        x_variable_label = cached$x_variable_label,
+        y = input$y_variable_menu,
+        y_variable_label = cached$y_variable_label,
+        group = cached$group_by_menu_selected,
+        panel_column = cached$panel_column_menu_selected,
+        panel_row = cached$panel_row_menu_selected,
+        plot_title = cached$plot_title
+      )
+      
+      # Render
       return(
-        get_bar_plot(
-          df = cached$d,
-          x = input$x_variable_menu,
-          x_variable_label = cached$x_variable_label,
-          y = input$y_variable_menu,
-          y_variable_label = cached$y_variable_label,
-          group = cached$group_by_menu_selected,
-          panel_column = cached$panel_column_menu_selected,
-          panel_row = cached$panel_row_menu_selected,
-          plot_title = cached$plot_title
+        ggplotly(
+          p$plot,
+          height = 300 * p$rows
         )
       )
     } else if(input$plot_menu == "Line") {
+      # Get plot object and stats
+      p <- get_line_plot(
+        df = cached$d,
+        x = input$x_variable_menu,
+        x_variable_label = cached$x_variable_label,
+        y = input$y_variable_menu,
+        y_variable_label = cached$y_variable_label,
+        group = cached$group_by_menu_selected,
+        panel_column = cached$panel_column_menu_selected,
+        panel_row = cached$panel_row_menu_selected,
+        plot_title = cached$plot_title
+      )
+      
+      # Render
       return(
-        get_line_plot(
-          df = cached$d,
-          x = input$x_variable_menu,
-          x_variable_label = cached$x_variable_label,
-          y = input$y_variable_menu,
-          y_variable_label = cached$y_variable_label,
-          group = cached$group_by_menu_selected,
-          panel_column = cached$panel_column_menu_selected,
-          panel_row = cached$panel_row_menu_selected,
-          plot_title = cached$plot_title
+        ggplotly(
+          p$plot,
+          height = 300 * p$rows
         )
       )
     } else {
+      # Get plot object and stats
+      p <- get_scatter_plot(
+        df = cached$d,
+        x = input$x_variable_menu,
+        x_variable_label = cached$x_variable_label,
+        y = input$y_variable_menu,
+        y_variable_label = cached$y_variable_label,
+        group = cached$group_by_menu_selected,
+        panel_column = cached$panel_column_menu_selected,
+        panel_row = cached$panel_row_menu_selected,
+        plot_title = cached$plot_title
+      )
+      
+      # Render
       return(
-        get_scatter_plot(
-          df = cached$d,
-          x = input$x_variable_menu,
-          x_variable_label = cached$x_variable_label,
-          y = input$y_variable_menu,
-          y_variable_label = cached$y_variable_label,
-          group = cached$group_by_menu_selected,
-          panel_column = cached$panel_column_menu_selected,
-          panel_row = cached$panel_row_menu_selected,
-          plot_title = cached$plot_title
+        ggplotly(
+          p$plot,
+          height = 300 * p$rows
         )
       )
     }

@@ -70,6 +70,11 @@ get_line_plot <- function(df, x, y, line_color = "#f8766d", ...) {
       )
   }
   
-  # Render plot
-  return(p)
+  # Return plot object and plot stats
+  return(
+    list(
+      plot = p,
+      rows = get_plot_rows(p)
+    )
+  )
 }

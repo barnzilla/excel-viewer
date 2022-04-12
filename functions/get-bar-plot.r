@@ -77,6 +77,11 @@ get_bar_plot <- function(df, x, y, fill_color = "#f8766d", ...) {
       )
   }
 
-  # Render plot
-  return(p)
+  # Return plot object and plot stats
+  return(
+    list(
+      plot = p,
+      rows = get_plot_rows(p)
+    )
+  )
 }
