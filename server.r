@@ -112,6 +112,36 @@ server <- function(input, output, session) {
       sheet_name = input$scenario_data_table_menu,
       rounding_digits = cached$round_decimals_slider
     )
+    
+    # Cache R code
+    cached$r_code <- c(
+      cached$r_code,
+      get_code_comment(
+        paste0(
+          "Import data table (",
+          input$scenario_data_table_menu,
+          ")"
+        )
+      ),
+      "d = get_data_table(",
+      paste0(get_nbsp(2), "data_path = c("),
+      paste0(
+        get_nbsp(4),
+        get_quot(paste0("scenarios/", match_scenario_name_to_file_name(input$scenario_menu))),
+        collapse = ",<br>"
+      ),
+      get_nbsp(2, "),"),
+      paste0(
+        get_nbsp(2, "sheet_name = "),
+        get_quot(input$scenario_data_table_menu, ",")
+      ),
+      paste0(
+        get_nbsp(2, "rounding_digits = "),
+        cached$round_decimals_slider
+      ),
+      ")",
+      ""
+    )
   })
   
   # Monitor import scenario button for clicks
@@ -591,6 +621,36 @@ server <- function(input, output, session) {
       rounding_digits = cached$round_decimals_slider
     )
     
+    # Cache R code
+    cached$r_code <- c(
+      cached$r_code,
+      get_code_comment(
+        paste0(
+          "Import data table (",
+          input$scenario_data_table_menu,
+          ")"
+        )
+      ),
+      "d = get_data_table(",
+      paste0(get_nbsp(2), "data_path = c("),
+      paste0(
+        get_nbsp(4),
+        get_quot(paste0("scenarios/", match_scenario_name_to_file_name(input$scenario_menu))),
+        collapse = ",<br>"
+      ),
+      get_nbsp(2, "),"),
+      paste0(
+        get_nbsp(2, "sheet_name = "),
+        get_quot(input$scenario_data_table_menu, ",")
+      ),
+      paste0(
+        get_nbsp(2, "rounding_digits = "),
+        cached$round_decimals_slider
+      ),
+      ")",
+      ""
+    )
+    
     # Reset plot objects that have been cached
     cached$plot_title <- cached$x_variable_label <- cached$y_variable_label <- NULL
   })
@@ -778,6 +838,36 @@ server <- function(input, output, session) {
         data_path = paste0("scenarios/", match_scenario_name_to_file_name(input$scenario_menu)),
         sheet_name = input$scenario_data_table_menu,
         rounding_digits = cached$round_decimals_slider
+      )
+      
+      # Cache R code
+      cached$r_code <- c(
+        cached$r_code,
+        get_code_comment(
+          paste0(
+            "Import data table (",
+            input$scenario_data_table_menu,
+            ")"
+          )
+        ),
+        "d = get_data_table(",
+        paste0(get_nbsp(2), "data_path = c("),
+        paste0(
+          get_nbsp(4),
+          get_quot(paste0("scenarios/", match_scenario_name_to_file_name(input$scenario_menu))),
+          collapse = ",<br>"
+        ),
+        get_nbsp(2, "),"),
+        paste0(
+          get_nbsp(2, "sheet_name = "),
+          get_quot(input$scenario_data_table_menu, ",")
+        ),
+        paste0(
+          get_nbsp(2, "rounding_digits = "),
+          cached$round_decimals_slider
+        ),
+        ")",
+        ""
       )
     }
     
@@ -1277,6 +1367,36 @@ server <- function(input, output, session) {
       sheet_name = input$scenario_data_table_menu,
       rounding_digits = cached$round_decimals_slider
     )
+    
+    # Cache R code
+    cached$r_code <- c(
+      cached$r_code,
+      get_code_comment(
+        paste0(
+          "Import data table (",
+          input$scenario_data_table_menu,
+          ")"
+        )
+      ),
+      "d = get_data_table(",
+      paste0(get_nbsp(2), "data_path = c("),
+      paste0(
+        get_nbsp(4),
+        get_quot(paste0("scenarios/", match_scenario_name_to_file_name(input$scenario_menu))),
+        collapse = ",<br>"
+      ),
+      get_nbsp(2, "),"),
+      paste0(
+        get_nbsp(2, "sheet_name = "),
+        get_quot(input$scenario_data_table_menu, ",")
+      ),
+      paste0(
+        get_nbsp(2, "rounding_digits = "),
+        cached$round_decimals_slider
+      ),
+      ")",
+      ""
+    )
   })
   
   # Visualization menu
@@ -1688,7 +1808,8 @@ server <- function(input, output, session) {
     list(
       input$scenario_menu, 
       input$scenario_data_table_menu,
-      input$visualization_menu
+      input$visualization_menu,
+      cached$d
     )
   })
   
@@ -1705,36 +1826,6 @@ server <- function(input, output, session) {
       
       # If common data tables exist
       if(length(cached$common_data_tables) > 0) {
-        # Cache R code
-        cached$r_code <- c(
-          cached$r_code,
-          get_code_comment(
-            paste0(
-              "Import data table (",
-              input$scenario_data_table_menu,
-              ")"
-            )
-          ),
-          "d = get_data_table(",
-          paste0(get_nbsp(2), "data_path = c("),
-          paste0(
-            get_nbsp(4),
-            get_quot(paste0("scenarios/", match_scenario_name_to_file_name(input$scenario_menu))),
-            collapse = ",<br>"
-          ),
-          get_nbsp(2, "),"),
-          paste0(
-            get_nbsp(2, "sheet_name = "),
-            get_quot(input$scenario_data_table_menu, ",")
-          ),
-          paste0(
-            get_nbsp(2, "rounding_digits = "),
-            cached$round_decimals_slider
-          ),
-          ")",
-          ""
-        )
-      
         # Cache R code
         cached$r_code <- c(
           cached$r_code,
@@ -1782,19 +1873,61 @@ server <- function(input, output, session) {
     }
   )
   
+  # Render data table
+  output$data_table <- renderDT(
+    {
+      # Dependencies  
+      req(
+        input$scenario_menu, 
+        input$scenario_data_table_menu,
+        cached$common_data_tables,
+        input$visualization_menu
+      )
+      
+      # Pass cached data table
+      if(input$visualization_menu != "Table") {
+        return(NULL)
+      } else {
+        return(cached$d)
+      }
+    },
+    filter = "top",
+    extensions = c("Buttons", "Scroller"),
+    options = list(
+      searchHighlight = TRUE,
+      pageLength = 25,
+      dom = "Biftip",
+      buttons = c("colvis"),
+      deferRender = TRUE,
+      searchDelay = 100,
+      initComplete = JS(
+        "function(settings, json) {",
+        "$(this.api().table().header()).css({'background-color': '#fff', 'color': '#111'});",
+        "}"
+      )
+    ),
+    rownames = FALSE,
+    escape = FALSE,
+    style = "bootstrap"
+  )
+  
   # Create a list of plot inputs to listen for
   listen_for_plot_inputs <- reactive({
     list(
       input$visualization_menu,
       input$plot_menu,
       input$x_variable_menu,
+      input$x_variable_label,
       input$y_variable_menu,
+      input$y_variable_label,
       input$group_by_menu,
       input$panel_column_menu,
       input$panel_row_menu,
-      input$plot_title
+      input$plot_title,
+      cached$d
     )
-  })
+  }) %>% 
+    debounce(500)
   
   # Cache R code for plot
   observeEvent(
@@ -1887,43 +2020,8 @@ server <- function(input, output, session) {
         ")",
         ""
       )
-    },
-    priority = -9999
+    }
   ) 
-  
-  # Render data table
-  output$data_table <- renderDT(
-    {
-      # Dependencies  
-      req(
-        input$scenario_menu, 
-        input$scenario_data_table_menu,
-        cached$common_data_tables,
-        input$visualization_menu == "Table"
-      )
-      
-      # Pass cached data table
-      cached$d
-    },
-    filter = "top",
-    extensions = c("Buttons", "Scroller"),
-    options = list(
-      searchHighlight = TRUE,
-      pageLength = 25,
-      dom = "Biftip",
-      buttons = c("colvis"),
-      deferRender = TRUE,
-      searchDelay = 100,
-      initComplete = JS(
-        "function(settings, json) {",
-        "$(this.api().table().header()).css({'background-color': '#fff', 'color': '#111'});",
-        "}"
-      )
-    ),
-    rownames = FALSE,
-    escape = FALSE,
-    style = "bootstrap"
-  )
   
   # Render plot
   output$plot <- renderPlotly({
@@ -1989,5 +2087,6 @@ server <- function(input, output, session) {
         )
       )
     }
-  })
+  }) %>% 
+    debounce(500)
 }
