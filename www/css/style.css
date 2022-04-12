@@ -1,0 +1,259 @@
+/* Page title */
+h2 { 
+  font-size: 2.5rem; 
+  font-weight: bold; 
+  text-align: center; 
+  margin-bottom: 5rem; 
+  font-weight: 300; 
+}
+
+a {
+  color: #555;
+}
+
+@keyframes blinker {
+ 50% { opacity: 0; }
+}
+
+/* Notifications */
+#error_message_inner { 
+  background: #f5f5f5; 
+  border: 2px solid #e3e3e3; 
+  color: #333333; 
+  width: 100%; 
+  height: 100%; 
+  display: block; 
+  padding: 2rem; 
+  
+}
+
+#shiny-notification-panel { 
+  top: 6rem; 
+  bottom: unset; 
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 100%; 
+  max-width: 50%; 
+  text-align: center; 
+}
+
+.shiny-notification { 
+  position: fixed; 
+  width: 500px;
+  height: 50px;
+  top: 50%; 
+  left: 50%;
+  margin-top: -25px;
+  margin-left: -250px;
+}
+
+.shiny-output-error, .shiny-output-error:before {
+  display: none;
+}
+
+.shiny-output-error-validation {
+  display: block;
+  background: #f4e4e4;
+  color: #c1726f;
+  border: 1px solid #f1d8dd;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+}
+
+.pohem-viewer-error-message {
+  display: inline-block;
+  background: #f4e4e4;
+  color: #c1726f;
+  border: 1px solid #f1d8dd;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+/* Menu items */
+.bs-select-all, .bs-deselect-all { 
+  font-size: 0.95rem !important; 
+}
+
+.btn-cycle { 
+  /* background-color: #28a745; */
+  color: white; 
+  padding: 0.1rem 1rem; 
+  margin-left: 2px; 
+  margin-right: 2px; 
+  font-size: 0.95rem; 
+  border-radius: 4px; 
+  margin-top: -0.15rem; 
+}
+
+div#checkout { 
+  margin-top: 3rem; 
+}
+
+/* Buttons*/
+button#submit_button, button#submit_button:visited, button#submit_button:focus, button.pohem-viewer-modal-footer-button, button.pohem-viewer-modal-footer-button:focus, button.pohem-viewer-modal-footer-button:visited {
+  background: #5bc0de; 
+  color: white; 
+}
+
+button#submit_button:hover, button.pohem-viewer-modal-footer-button:hover { 
+  background: white; 
+  color: #5bc0de; 
+}
+
+button.settings-button { 
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  text-align: center; 
+  border-radius: 4px; 
+  text-decoration: none; 
+}
+
+button.pohem-viewer-settings-button { 
+  padding: 0.5rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+button#submit_button {
+  margin-bottom: 0.5rem;
+}
+
+div#import_scenario_button, div#rename_scenario_modal_button, div#clone_scenario_modal_button, div#delete_scenario_modal_button, div#rename_columns_modal_button, div#filter_columns_modal_button, div#filter_rows_modal_button, div#pivot_long_modal_button, div#pivot_wide_modal_button, div#complete_cases_button, div#reset_data_button {
+  display: inline;
+}
+
+#download_data, #download_wrangled_data {
+  background: #5bc0de;
+}
+#download_data:hover, #download_wrangled_data:hover {
+  color: #5bc0de;
+}
+
+#center-button { 
+  text-align: center; 
+}
+
+#empty_shopping_cart {
+  display: block;
+  margin-bottom: 3.5rem;
+}
+
+/* DataTable elements */
+.dataTables_info { 
+  display: inline-block; 
+  float: left; 
+}
+
+table.dataTable thead th, table.dataTable thead td, table.dataTable.no-footer {
+  border-bottom: 1px solid #ddd !important;
+}
+
+table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc {
+  background-image: none !important;
+}
+
+.table.dataTable tbody td.active, .table.dataTable tbody tr.active td { 
+  background-color: #5bc0de !important; 
+  color: white !important; 
+}
+
+td[data-type='factor'] input { 
+  width: 100px !important; 
+}
+
+.dt-buttons { 
+  margin-left: 1rem;
+}
+
+.dropdown-menu>.active>a {
+  background: #5bc0de !important;
+}
+
+.pagination>li:first-child>a, .pagination>li:last-child>a {
+  font-weight: 500 !important;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+  background: #5bc0de !important;
+  border-color: #5bc0de !important;
+  font-weight: 500 !important;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+  color: white !important;
+}
+
+.pagination>li>a, .pagination>li>span {
+  color: #5bc0de !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  background: transparent !important;
+}
+
+.dataTables_wrapper:hover .dataTables_paginate:hover .paginate_button:hover {
+  border: 0 !important;
+}
+
+/* File input progress bar */
+.shiny-file-input-progress {
+  margin-top: 1rem;
+}
+.progress-bar {
+  background-color: #5bc0de;
+}
+
+/* Visualization elements */
+#frequency_table > .table th {
+  background: #5bc0de;
+  color: white;
+}
+
+.irs--shiny .irs-bar {
+  top: 25px;
+  height: 8px;
+  border-top: 1px solid #5bc0de !important;
+  border-bottom: 1px solid #5bc0de !important;
+  background: #5bc0de !important;
+}
+
+.irs--shiny .irs-single, .irs--shiny .irs-from, .irs--shiny .irs-to, .irs--shiny .irs-single {
+  background-color: #5bc0de !important;
+}
+
+.irs--shiny .irs-grid {
+  display: none !important;
+}
+
+/* Labels */
+#get_rounding_digits label {
+  font-weight: normal !important;
+}
+
+/* Other */
+hr {
+  border-top: 1px solid #e3e3e3;
+}
+.conditional-hr {
+  margin-bottom: 2rem !important;
+}
+.modal-header, .modal-footer {
+  background: #f5f5f5;
+}
+.modal-body {
+  padding: 3rem;
+}
+
+/* R code */
+#r-code {
+  
+}
+.code-comment {
+  color: #998;
+  font-style: italic;
+}
