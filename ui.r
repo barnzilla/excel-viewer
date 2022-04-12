@@ -68,7 +68,7 @@ ui <- fluidPage(
           )
         ), br(),
         DTOutput("data_table") %>% withSpinner(color = "#5bc0de", type = 8, color.background = "#ffffff"),
-        plotlyOutput("plot") %>% withSpinner(color = "#5bc0de", type = 8, color.background = "#ffffff")
+        plotlyOutput("plot", width = "100%", height = "auto") %>% withSpinner(color = "#5bc0de", type = 8, color.background = "#ffffff")
       ),
       tabPanel(
         "R console", br(),
