@@ -48,7 +48,7 @@ get_data_table <- function(data_path, sheet_name, rounding_digits = 3) {
   
   # Update vector names
   names(d) <- trimws(tolower(names(d)))
-  names(d) <- gsub(" |[-]", "_", names(d))
+  names(d) <- gsub(" |[-]|:", "_", names(d))
   names(d) <- gsub("[=]", "_equals_", names(d))
   names(d) <- gsub("[,]", "_to_", names(d))
   names(d) <- gsub("[(]|[)]|[[]|[]]| ", "", names(d))
@@ -57,7 +57,9 @@ get_data_table <- function(data_path, sheet_name, rounding_digits = 3) {
   names(d) <- gsub(">=", "greater_than_equal_to_", names(d))
   names(d) <- gsub(">", "greater_than_", names(d))
   names(d) <- gsub("__", "_", names(d))
-  names(d) <- gsub("_$", "", names(d))
+  
+  # Remove any leading or trailing underscores
+  names(d) <- gsub("^_|_$", "", names(d))
   
   # Return results
   return(d)
