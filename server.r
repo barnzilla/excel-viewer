@@ -464,7 +464,7 @@ server <- function(input, output, session) {
       ")",
       ""
     )
-      
+    
     # Update scenario menu
     cached$scenario_names <- get_scenario_names()
     
@@ -578,7 +578,7 @@ server <- function(input, output, session) {
     # Mismatch occurs after a scenario has been renamed
     if(length(scenario_files) != length(input$scenario_menu)) {
       return(NULL)
-    # No common data tables
+      # No common data tables
     } else if(length(cached$common_data_tables) == 0) {
       return(NULL)
     } else {
@@ -885,7 +885,7 @@ server <- function(input, output, session) {
       "]",
       ""
     )
-
+    
     # Remove modal
     removeModal()
   })
@@ -1176,7 +1176,7 @@ server <- function(input, output, session) {
           get_nbsp(2, ")"),
           ""
         )
-          
+        
         # Remove modal
         removeModal()
       }
@@ -1294,7 +1294,7 @@ server <- function(input, output, session) {
       removeModal()
     }
   })
-    
+  
   # Complete cases button
   output$complete_cases_button <- renderUI({
     # Dependencies
@@ -2032,10 +2032,10 @@ server <- function(input, output, session) {
       cached$common_data_tables,
       input$visualization_menu == "Plot",
       input$plot_menu,
-      input$x_variable_menu,
-      input$y_variable_menu
+      input$x_variable_menu %in% names(cached$d),
+      input$y_variable_menu %in% names(cached$d)
     )
-  
+    
     # Update cached plot-related variables
     cached$x_variable_menu_selected <- input$x_variable_menu
     cached$y_variable_menu_selected <- input$y_variable_menu
