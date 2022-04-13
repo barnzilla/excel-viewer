@@ -1602,7 +1602,7 @@ server <- function(input, output, session) {
       get_drop_down(
         input_id = "y_variable_menu",
         label = "Y variable",
-        choices = names(cached$d),
+        choices = names(cached$d)[which(unname(unlist(lapply(cached$d, is.numeric))))],
         selected = cached$y_variable_menu_selected,
         actions_box = FALSE,
         max_options = 1
