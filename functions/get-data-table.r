@@ -48,7 +48,7 @@ get_data_table <- function(data_path, sheet_name, rounding_digits = 3) {
   
   # Update vector names
   names(d) <- trimws(tolower(names(d)))
-  names(d) <- gsub(" |[-]|:", "_", names(d))
+  names(d) <- gsub(" |[-]|:|[/]|[+]", "_", names(d))
   names(d) <- gsub("[=]", "_equals_", names(d))
   names(d) <- gsub("[,]", "_to_", names(d))
   names(d) <- gsub("[(]|[)]|[[]|[]]| ", "", names(d))
